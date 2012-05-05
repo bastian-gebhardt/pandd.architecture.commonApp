@@ -1,0 +1,7 @@
+/.project
+/.buildpath
+/.classpath
+/.settings
+/lib
+dist/
+/setup.xml
