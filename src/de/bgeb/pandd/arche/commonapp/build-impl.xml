@@ -1,0 +1,120 @@
+<!DOCTYPE project>
+<project name="pandd_build_impl" basedir="." xmlns:artifact="antlib:org.apache.maven.artifact.ant">
+    <description>
+    	Implementation from Build file for Pandd Framework Developing
+    	(there are nothing to configure in this file)
+    </description>
+
+	
+	
+    <!-- Betriebssystemunabhaengige Loesung finden -->
+    <exec executable="sed" inputstring="${project_groupId}" outputproperty="project_groupId_as_path">
+      <arg value="s/\./\//g"/>
+    </exec>
+    	
+	<target name="setup" depends="_copy_skeleton, _create_packages, _copy_pom, _copy_build-interface, _copy_pandd">
+		<!-- move pandd into lib-folder -->
+		<!-- copy skeleton -->
+		<!-- create src/groupId/artifactId -->
+		<!-- create test/groupId/artifactId -->
+		<!-- copy pom -->
+		<!-- copy framework build-inteface -->
+		<!-- copy pandd file -->
+	</target>
+	
+	<target name="_copy_skeleton">
+		<copy todir=".">
+		    <fileset dir="lib/${arche_groupIdAsPath}/${arche_artifactId}/skeleton" includes="**/*" />
+		</copy>
+	</target>
+	
+	<target name="_create_packages">
+		<mkdir dir="src/${project_groupId_as_path}/${project_artifactId}" />
+		<mkdir dir="test/${project_groupId_as_path}/${project_artifactId}" />
+	</target>
+
+    <target name="_copy_pom">
+        <copy file="lib/${arche_groupIdAsPath}/${arche_artifactId}/pom_example.xml" tofile="pom.xml" />
+        <replace file="pom.xml" token="@add_project_artifacId_here@" value="${project_artifactId}"/>
+        <replace file="pom.xml" token="@add_project_groupId_here@" value="${project_groupId}"/>
+        <replace file="pom.xml" token="@add_project_version_here@" value="${project_version}"/>
+    	<replace file="pom.xml" token="@add_download_url_here@" value="${m2_download_repo}"/>
+        <replace file="pom.xml" token="@add_upload_url_here@" value="${m2_upload_repo}"/>
+    </target>
+	
+	<target name="_copy_build-interface">
+        <copy file="lib/de/bgeb/pandd/framework/build-interface.xml" tofile="build.xml" />
+        <replace file="build.xml" token="@add_project_name_here@" value="${project_artifactId}"/>
+        <replace file="build.xml" token="@add_build-impl_file_here@" value="lib/${arche_groupIdAsPath}/${arche_artifactId}/build-impl.xml"/>
+	</target>
+
+	<target name="_copy_pandd">
+		<copy todir=".">
+		    <fileset dir="lib/${arche_groupIdAsPath}/${arche_artifactId}" includes="pandd.php" />
+		</copy>
+	</target>
+	
+	
+	<target name="_load_pom-file">
+		<artifact:pom id="pomfile" file="pom.xml" />
+	</target>
+	
+	<target name="clean_dist">
+		<delete includeEmptyDirs="true">
+			<fileset dir="dist/compiled" includes="**/*" />
+			<fileset dir="dist" includes="*.jar" />
+		</delete>		
+	</target> 
+	
+	<target name="update-dependencies" depends="_load_pom-file">
+		<artifact:dependencies filesetId="deps.fileset" >
+			<pom refid="pomfile"/>
+   		</artifact:dependencies>
+   		<unzip dest="lib">
+    		<fileset refid="deps.fileset" />
+   		</unzip>
+	</target>
+
+	<target name="test">
+		<echo message="not implemented yet" />
+	</target>
+
+	<target name="publish" depends="_load_pom-file">
+		<artifact:dependencies filesetId="deps.fileset" scopes="compile">
+			<pom refid="pomfile"/>
+   		</artifact:dependencies>
+   		<unzip dest="dist/compiled/lib">
+    		<fileset refid="deps.fileset" />
+		    <patternset>
+		        <exclude name="META-INF/"/>
+		    	<exclude name="pom.xml build.xml"/>
+		    </patternset>
+  		</unzip>
+
+		<copy file="pandd.php" tofile="dist/compiled/pandd.php" />
+		<zip destfile="dist/${pomfile.artifactId}-${pomfile.version}.zip">
+			<zipfileset dir="./" includes="src/ public/ resources/ conf/ doc/" prefix="${pomfile.artifactId}-${pomfile.version}"/>
+			<!-- Note: pandd-framework itself will be exluded -->
+			<zipfileset dir="dist/compiled/" excludes="/de/bgeb/pandd/" prefix="${pomfile.artifactId}-${pomfile.version}" />
+		</zip>
+        <delete includeemptydirs="true" >
+        	<fileset dir="dist/compiled" includes="**/*" />
+        </delete>
+	</target>
+
+	<target name="m2_package" depends="clean_dist" >
+		<zip destfile="dist/${pomfile.artifactId}-${pomfile.version}.jar" >
+			<zipfileset dir="src/" />
+		</zip>
+	</target>
+	<target name="m2_install" depends="m2_package, _load_pom-file">
+		<artifact:install file="dist/${pomfile.artifactId}-${pomfile.version}.jar">
+		    <pom refid="pomfile"/>
+		</artifact:install>
+	</target>
+	<target name="m2_deploy" depends="m2_install" >
+	  <artifact:deploy file="dist/${pomfile.artifactId}-${pomfile.version}.jar">
+	    <pom refid="pomfile"/>
+	  </artifact:deploy>
+	</target>
+</project>
