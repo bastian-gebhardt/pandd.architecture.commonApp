@@ -10,6 +10,11 @@
     <version>@add_project_version_here@</version>
     
     <dependencies>
+        <dependency>
+    		<groupId>org.sebastianbergmann</groupId>
+    		<artifactId>phpunit</artifactId>
+    		<version>3.6.10</version>
+    	</dependency>
 		<!-- don't remove this dependency, it's needed by pandd framework -->
 	    <dependency>
 	      <groupId>de.bgeb.pandd.arche</groupId>

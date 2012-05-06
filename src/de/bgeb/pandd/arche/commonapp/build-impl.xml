@@ -27,6 +27,8 @@
 		<copy todir=".">
 		    <fileset dir="lib/${arche_groupIdAsPath}/${arche_artifactId}/skeleton" includes="**/*" />
 		</copy>
+		<chmod file="resources/syntax_check.sh" perm="755"/>
+		<chmod file="resources/phpunit.php" perm="755"/>
 		<defaultexcludes add="**/.gitignore"/>
 	</target>
 	
@@ -79,9 +81,17 @@
    		</unzip>
 	</target>
 
-	<target name="test">
-		<echo message="not implemented yet" />
+	<target name="_test_syntax">
+		<exec executable="resources/syntax_check.sh" failonerror="true" />
 	</target>
+
+	<target name="_test_phpunit">
+		<exec executable="php" failonerror="true">
+			<arg line="resources/phpunit.php -c resources/phpunit.xml" />
+		</exec>
+	</target>	
+	
+	<target name="test" depends="_test_syntax, _test_phpunit" />
 
 	<target name="publish" depends="_load_pom-file">
 		<artifact:dependencies filesetId="deps.fileset" scopes="compile">
