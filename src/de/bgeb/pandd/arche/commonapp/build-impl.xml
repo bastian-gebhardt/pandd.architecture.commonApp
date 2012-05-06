@@ -12,7 +12,7 @@
       <arg value="s/\./\//g"/>
     </exec>
     	
-	<target name="setup" depends="_copy_skeleton, _create_packages, _copy_pom, _copy_build-interface, _copy_pandd">
+	<target name="setup" depends="_copy_skeleton, _create_packages, _copy_pom, _copy_build-interface, _copy_pandd, update-dependencies">
 		<!-- move pandd into lib-folder -->
 		<!-- copy skeleton -->
 		<!-- create src/groupId/artifactId -->
@@ -116,19 +116,13 @@
         </delete>
 	</target>
 
-	<target name="m2_package" depends="clean_dist" >
-		<zip destfile="dist/${pomfile.artifactId}-${pomfile.version}.jar" >
-			<zipfileset dir="src/" />
-		</zip>
+	<target name="m2_package">
+		<echo message="not implemented yet" />
 	</target>
-	<target name="m2_install" depends="m2_package, _load_pom-file">
-		<artifact:install file="dist/${pomfile.artifactId}-${pomfile.version}.jar">
-		    <pom refid="pomfile"/>
-		</artifact:install>
+	<target name="m2_install">
+		<echo message="not implemented yet" />
 	</target>
-	<target name="m2_deploy" depends="m2_install" >
-	  <artifact:deploy file="dist/${pomfile.artifactId}-${pomfile.version}.jar">
-	    <pom refid="pomfile"/>
-	  </artifact:deploy>
+	<target name="m2_deploy">
+		<echo message="not implemented yet" />
 	</target>
 </project>
