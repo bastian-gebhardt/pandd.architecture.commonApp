@@ -33,6 +33,8 @@
 	<target name="_create_packages">
 		<mkdir dir="src/${project_groupId_as_path}/${project_artifactId}" />
 		<mkdir dir="test/${project_groupId_as_path}/${project_artifactId}" />
+		<copy file="lib/${arche_groupIdAsPath}/${arche_artifactId}/empty_gitignore" tofile="src/${project_groupId_as_path}/${project_artifactId}/.gitignore" />
+		<copy file="lib/${arche_groupIdAsPath}/${arche_artifactId}/empty_gitignore" tofile="test/${project_groupId_as_path}/${project_artifactId}/.gitignore" />
 	</target>
 
     <target name="_copy_pom">
