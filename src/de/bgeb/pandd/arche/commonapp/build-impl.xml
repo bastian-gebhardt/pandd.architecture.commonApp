@@ -23,9 +23,11 @@
 	</target>
 	
 	<target name="_copy_skeleton">
+		<defaultexcludes remove="**/.gitignore"/>
 		<copy todir=".">
 		    <fileset dir="lib/${arche_groupIdAsPath}/${arche_artifactId}/skeleton" includes="**/*" />
 		</copy>
+		<defaultexcludes add="**/.gitignore"/>
 	</target>
 	
 	<target name="_create_packages">
