@@ -66,14 +66,26 @@
 	</target>
 	
 	<target name="clean_dist">
+		<defaultexcludes remove="**/.gitignore"/>
 		<delete includeEmptyDirs="true">
-			<fileset dir="dist/compiled" includes="**/*" />
-			<fileset dir="dist" includes="*.jar" />
-		</delete>		
+			<fileset dir="dist/compiled" includes="**/*" excludes=".gitignore" />
+			<fileset dir="dist" includes="**/*" excludes="compiled/*" />
+		</delete>
+		<defaultexcludes add="**/.gitignore"/>
 	</target> 
 	
-	<target name="update-dependencies" depends="_load_pom-file">
-		<artifact:dependencies filesetId="deps.fileset" >
+	<target name="clean_lib">
+		<defaultexcludes remove="**/.gitignore"/>
+        <delete includeEmptyDirs="true">
+            <fileset dir="lib" includes="**/*" excludes=".gitignore" />
+        </delete>       
+		<defaultexcludes add="**/.gitignore"/>
+	 </target> 
+	
+	<target name="clean" depends="clean_lib, clean_dist" />
+	
+	<target name="update-dependencies" depends="_load_pom-file, clean_lib">
+		<artifact:dependencies filesetId="deps.fileset" useScope="test">
 			<pom refid="pomfile"/>
    		</artifact:dependencies>
    		<unzip dest="lib">
@@ -111,9 +123,13 @@
 			<!-- Note: pandd-framework itself will be exluded -->
 			<zipfileset dir="dist/compiled/" excludes="/de/bgeb/pandd/" prefix="${pomfile.artifactId}-${pomfile.version}" />
 		</zip>
+		
+		<!-- delete compiled content to avoid double code suggestion in eclipse ide -->
+		<defaultexcludes remove="**/.gitignore"/>
         <delete includeemptydirs="true" >
-        	<fileset dir="dist/compiled" includes="**/*" />
+        	<fileset dir="dist/compiled" includes="**/*" excludes=".gitignore" />
         </delete>
+		<defaultexcludes add="**/.gitignore"/>
 	</target>
 
 	<target name="m2_package">
