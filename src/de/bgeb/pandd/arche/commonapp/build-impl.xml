@@ -92,6 +92,9 @@
    		</unzip>
 	</target>
 
+	<target name="post_update-dependencies">
+	</target>
+	
 	<target name="_test_syntax">
 		<exec executable="resources/syntax_check.sh" failonerror="true" />
 	</target>
