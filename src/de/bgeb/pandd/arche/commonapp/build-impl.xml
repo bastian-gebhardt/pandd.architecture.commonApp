@@ -116,7 +116,7 @@
 		    </patternset>
   		</unzip>
 
-        <copy file="lib/${arche_groupIdAsPath}/${arche_artifactId}/pandd.php" tofile="dist/compiled/pandd.php" />
+        <copy file="lib/de/bgeb/pandd/arche/commonapp/pandd.php" tofile="dist/compiled/pandd.php" />
         <replace file="pandd.php" token="@add_environment_here@" value="production"/>
 
 		<zip destfile="dist/${pomfile.artifactId}-${pomfile.version}.zip">
