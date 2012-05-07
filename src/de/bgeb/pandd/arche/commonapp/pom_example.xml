@@ -14,12 +14,14 @@
     		<groupId>org.sebastianbergmann</groupId>
     		<artifactId>phpunit</artifactId>
     		<version>3.6.10</version>
+    		<scope>test</scope>
     	</dependency>
 		<!-- don't remove this dependency, it's needed by pandd framework -->
 	    <dependency>
 	      <groupId>de.bgeb.pandd.arche</groupId>
 	      <artifactId>commonapp</artifactId>
 	      <version>0.1.0-SNAPSHOT</version>
+	      <scope>test</scope>
 	    </dependency>
     </dependencies>
     
