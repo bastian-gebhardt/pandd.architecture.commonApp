@@ -8,6 +8,8 @@ class Pandd{
 		
 		self::setRootConsts();
 		
+		self::setIncludePath();
+		
 		self::addAutoLoader();
 		
 	}
@@ -19,6 +21,15 @@ class Pandd{
 		define('PANDD_LIB_ROOT',PANDD_APP_ROOT.'/lib');
 	}
 	
+	private static function setIncludePath(){
+		set_include_path(
+				PANDD_LIB_ROOT.PATH_SEPARATOR
+				.PANDD_SRC_ROOT.PATH_SEPARATOR
+				.PANDD_TEST_ROOT.PATH_SEPARATOR
+				.get_include_path()
+		);
+	}
+		
 	private static function addAutoLoader(){
 		spl_autoload_register(array(__CLASS__, 'userAutoLoader'));
 	}
