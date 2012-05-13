@@ -138,13 +138,13 @@
 		<defaultexcludes add="**/.gitignore"/>
 	</target>
 
-	<target name="m2_package">
+	<target name="mvn_package">
 		<echo message="not implemented yet" />
 	</target>
-	<target name="m2_install">
+	<target name="mvn_install">
 		<echo message="not implemented yet" />
 	</target>
-	<target name="m2_deploy">
+	<target name="mvn_deploy">
 		<echo message="not implemented yet" />
 	</target>
 </project>
