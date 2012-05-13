@@ -19,22 +19,38 @@
     </dependencies>
     
   <!-- needed to download dependencies -->
-  <repositories>  
-    <repository>
-      <id>download</id>
-      <name>user specified repo</name>
-      <url>http://localhost:8080/archiva/repository/internal/</url>
-      <layout>default</layout>
-    </repository>
-  </repositories>  
+   <repositories>
+         <repository>
+               <id>php-central</id>
+               <url>http://localhost:8080/archiva/repository/internal/</url>
+               <snapshots>
+                     <enabled>false</enabled>
+               </snapshots>
+         </repository>
+         <repository>
+               <id>php-snapshots</id>
+               <url>http://localhost:8080/archiva/repository/snapshots/</url>
+               <releases>
+                     <enabled>false</enabled>
+               </releases>
+         </repository>
+   </repositories>
   <!-- needed to upload package -->
   <distributionManagement>  
     <repository>
-      <id>upload</id>
+      <id>php-upload</id>
       <name>user specified repo</name>
       <url>http://localhost:8080/archiva/repository/internal/</url>
       <layout>default</layout>
     </repository>
+    
+    <snapshotRepository>
+        <id>php-snapshot-upload</id>
+        <name>Snapshot Repository</name>
+        <url>http://localhost:8080/archiva/repository/snapshots/</url>
+        <uniqueVersion>false</uniqueVersion>
+    </snapshotRepository>
+    
   </distributionManagement>
   
 </project>
