@@ -3,7 +3,11 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   
-	<name>@add_project_artifacId_here@</name>
+      <parent>
+      	<groupId>de.bgeb</groupId>
+      	<artifactId>bgeb-superpom</artifactId>
+      	<version>1.0.0</version>
+      </parent>	<name>@add_project_artifacId_here@</name>
 
 	<groupId>@add_project_groupId_here@</groupId>
     <artifactId>@add_project_artifacId_here@</artifactId>
@@ -20,48 +24,9 @@
 	    <dependency>
 	      <groupId>de.bgeb.pandd.arche</groupId>
 	      <artifactId>commonapp</artifactId>
-	      <version>0.1.0-SNAPSHOT</version>
+	      <version>0.2.0-SNAPSHOT</version>
 	      <scope>test</scope>
 	    </dependency>
     </dependencies>
     
-  <!-- needed to download dependencies -->
-   <repositories>
-         <repository>
-               <id>download-server</id>
-               <name>user specified download repo</name>
-               <url>@add_download_url_here@</url>
-               <layout>default</layout>
-               <snapshots>
-                     <enabled>false</enabled>
-               </snapshots>
-         </repository>
-         <repository>
-               <id>snapshots-download-server</id>
-               <name>user specified snapshot download repo</name>
-               <url>@add_snapshot_download_url_here@</url>
-               <layout>default</layout>
-               <releases>
-                     <enabled>false</enabled>
-               </releases>
-         </repository>
-   </repositories>
-
-  <!-- needed to upload package -->
-  <distributionManagement>  
-    <repository>
-      <id>upload-server</id>
-      <name>user specified upload repo</name>
-      <url>@add_upload_url_here@</url>
-      <layout>default</layout>
-    </repository>
-    <snapshotRepository>
-        <id>snapshot-upload-server</id>
-        <name>user specified snapshot upload repo</name>
-        <url>@add_snapshot_upload_url_here@</url>
-        <layout>default</layout>
-        <uniqueVersion>false</uniqueVersion>
-    </snapshotRepository>
-  </distributionManagement>
-
 </project>

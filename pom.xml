@@ -4,52 +4,23 @@
   <modelVersion>4.0.0</modelVersion>
   
 	<name>common-app</name>
-
+      
+      <parent>
+      	<groupId>de.bgeb</groupId>
+      	<artifactId>bgeb-superpom</artifactId>
+      	<version>1.0.0</version>
+      </parent>
+      
 	<groupId>de.bgeb.pandd.arche</groupId>
     <artifactId>commonapp</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.2.0-SNAPSHOT</version>
     
     <dependencies>
 	    <dependency>
 	      <groupId>de.bgeb.pandd</groupId>
 	      <artifactId>framework</artifactId>
-	      <version>0.1.0-SNAPSHOT</version>
+	      <version>0.2.0-SNAPSHOT</version>
 	    </dependency>
     </dependencies>
     
-  <!-- needed to download dependencies -->
-   <repositories>
-         <repository>
-               <id>php-central</id>
-               <url>http://localhost:8080/archiva/repository/internal/</url>
-               <snapshots>
-                     <enabled>false</enabled>
-               </snapshots>
-         </repository>
-         <repository>
-               <id>php-snapshots</id>
-               <url>http://localhost:8080/archiva/repository/snapshots/</url>
-               <releases>
-                     <enabled>false</enabled>
-               </releases>
-         </repository>
-   </repositories>
-  <!-- needed to upload package -->
-  <distributionManagement>  
-    <repository>
-      <id>php-upload</id>
-      <name>user specified repo</name>
-      <url>http://localhost:8080/archiva/repository/internal/</url>
-      <layout>default</layout>
-    </repository>
-    
-    <snapshotRepository>
-        <id>php-snapshot-upload</id>
-        <name>Snapshot Repository</name>
-        <url>http://localhost:8080/archiva/repository/snapshots/</url>
-        <uniqueVersion>false</uniqueVersion>
-    </snapshotRepository>
-    
-  </distributionManagement>
-  
 </project>
