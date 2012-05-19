@@ -7,11 +7,14 @@
       	<groupId>de.bgeb</groupId>
       	<artifactId>bgeb-superpom</artifactId>
       	<version>1.0.0</version>
-      </parent>	<name>@add_project_artifacId_here@</name>
+      </parent>	
+      
+    <name>@add_project_artifacId_here@</name>
 
 	<groupId>@add_project_groupId_here@</groupId>
     <artifactId>@add_project_artifacId_here@</artifactId>
     <version>@add_project_version_here@</version>
+    <packaging>app</packaging>
     
     <dependencies>
         <dependency>
@@ -20,13 +23,35 @@
     		<version>3.6.10</version>
     		<scope>test</scope>
     	</dependency>
-		<!-- don't remove this dependency, it's needed by pandd framework -->
+
+<!-- pandd framework dependencies -->
 	    <dependency>
 	      <groupId>de.bgeb.pandd.arche</groupId>
 	      <artifactId>commonapp</artifactId>
 	      <version>0.2.0-SNAPSHOT</version>
 	      <scope>test</scope>
 	    </dependency>
+	    <dependency>
+	      <groupId>de.bgeb.pandd</groupId>
+	      <artifactId>package</artifactId>
+	      <version>0.1.0-SNAPSHOT</version>
+	      <scope>test</scope>
+	    </dependency>
+	    <dependency>
+	      <groupId>de.bgeb.pandd</groupId>
+	      <artifactId>bootstrap</artifactId>
+	      <version>0.1.0-SNAPSHOT</version>
+	      <scope>test</scope>
+	    </dependency>
+<!-- pandd framework dependencies -->
+
     </dependencies>
     
+       <properties>
+   		<pandd.packaging.lib>de/bgeb/pandd/package/lib.xml</pandd.packaging.lib>
+   		<pandd.packaging.app>de/bgeb/pandd/package/app.xml</pandd.packaging.app>
+   		<pandd.bootstrap.dev>de/bgeb/pandd/bootstrap/dev.xml</pandd.bootstrap.dev>
+   		<pandd.bootstrap.pro>de/bgeb/pandd/bootstrap/pro.xml</pandd.bootstrap.pro>
+   </properties>
+
 </project>

@@ -1,8 +1,7 @@
 <!DOCTYPE project>
 <project name="common-app" basedir="." xmlns:artifact="antlib:org.apache.maven.artifact.ant">
     <description>
-    	Custom build file for common-lib project
-    	(there are nothing to configure in this file)
+    	build file for developing new pandd plugins
     </description>
 
 	<artifact:pom id="pomfile" file="pom.xml" />
