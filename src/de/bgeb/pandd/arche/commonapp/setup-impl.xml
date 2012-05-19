@@ -1,7 +1,7 @@
 <!DOCTYPE project>
 <project name="pandd_build_impl" basedir="." xmlns:artifact="antlib:org.apache.maven.artifact.ant">
     <description>
-    	Implementation from Build file for Pandd Framework Developing
+    	Implementation from Setup file for Pandd Framework Developing
     	(there are nothing to configure in this file)
     </description>
 
@@ -12,14 +12,14 @@
       <arg value="s/\./\//g"/>
     </exec>
     	
-	<target name="setup" depends="_copy_skeleton, _create_packages, _copy_pom, _copy_build-interface, _copy_pandd, update-dependencies">
+	<target name="setup" depends="_copy_skeleton, _create_packages, _copy_pom, _copy_build-interface, _load_dependencies">
 		<!-- move pandd into lib-folder -->
 		<!-- copy skeleton -->
 		<!-- create src/groupId/artifactId -->
 		<!-- create test/groupId/artifactId -->
 		<!-- copy pom -->
 		<!-- copy framework build-inteface -->
-		<!-- copy pandd file -->
+		<!-- copy bootstrap file -->
 	</target>
 	
 	<target name="_copy_skeleton">
@@ -44,10 +44,6 @@
         <replace file="pom.xml" token="@add_project_artifacId_here@" value="${project_artifactId}"/>
         <replace file="pom.xml" token="@add_project_groupId_here@" value="${project_groupId}"/>
         <replace file="pom.xml" token="@add_project_version_here@" value="${project_version}"/>
-    	<replace file="pom.xml" token="@add_download_url_here@" value="${mvn_download_repo}"/>
-        <replace file="pom.xml" token="@add_upload_url_here@" value="${mvn_upload_repo}"/>
-    	<replace file="pom.xml" token="@add_snapshot_download_url_here@" value="${mvn_snapshot_download_repo}"/>
-    	<replace file="pom.xml" token="@add_snapshot_upload_url_here@" value="${mvn_snapshot_upload_repo}"/>
     </target>
 	
 	<target name="_copy_build-interface">
@@ -56,95 +52,7 @@
         <replace file="build.xml" token="@add_arche-package_here@" value="lib/${arche_groupIdAsPath}/${arche_artifactId}"/>
 	</target>
 
-	<target name="_copy_pandd">
-        <copy file="lib/${arche_groupIdAsPath}/${arche_artifactId}/pandd.php" tofile="pandd.php" />
-        <replace file="pandd.php" token="@add_environment_here@" value="development"/>
-	</target>
-	
-	
-	<target name="_load_pom-file">
-		<artifact:pom id="pomfile" file="pom.xml" />
-	</target>
-	
-	<target name="clean_dist">
-		<defaultexcludes remove="**/.gitignore"/>
-		<delete includeEmptyDirs="true">
-			<fileset dir="dist/compiled" includes="**/*" excludes=".gitignore" />
-			<fileset dir="dist" includes="**/*" excludes="compiled/*" />
-		</delete>
-		<defaultexcludes add="**/.gitignore"/>
-	</target> 
-	
-	<target name="clean_lib">
-		<defaultexcludes remove="**/.gitignore"/>
-        <delete includeEmptyDirs="true">
-            <fileset dir="lib" includes="**/*" excludes=".gitignore" />
-        </delete>       
-		<defaultexcludes add="**/.gitignore"/>
-	 </target> 
-	
-	<target name="clean" depends="clean_lib, clean_dist" />
-	
-	<target name="update-dependencies" depends="_load_pom-file, clean_lib">
-		<artifact:dependencies filesetId="deps.fileset" useScope="test">
-			<pom refid="pomfile"/>
-   		</artifact:dependencies>
-   		<unzip dest="lib">
-    		<fileset refid="deps.fileset" />
-   		</unzip>
-	</target>
-
-	<target name="post_update-dependencies">
-	</target>
-	
-	<target name="_test_syntax">
-		<exec executable="resources/syntax_check.sh" failonerror="true" />
-	</target>
-
-	<target name="_test_phpunit">
-		<exec executable="php" failonerror="true">
-			<arg line="resources/phpunit.php -c resources/phpunit.xml" />
-		</exec>
-	</target>	
-	
-	<target name="test" depends="_test_syntax, _test_phpunit" />
-
-	<target name="publish" depends="_load_pom-file">
-		<artifact:dependencies filesetId="deps.fileset" scopes="compile">
-			<pom refid="pomfile"/>
-   		</artifact:dependencies>
-   		<unzip dest="dist/compiled/lib">
-    		<fileset refid="deps.fileset" />
-		    <patternset>
-		        <exclude name="META-INF/"/>
-		    	<exclude name="pom.xml build.xml"/>
-		    </patternset>
-  		</unzip>
-
-        <copy file="lib/de/bgeb/pandd/arche/commonapp/pandd.php" tofile="dist/compiled/pandd.php" />
-        <replace file="dist/compiled/pandd.php" token="@add_environment_here@" value="production"/>
-
-		<zip destfile="dist/${pomfile.artifactId}-${pomfile.version}.zip">
-			<zipfileset dir="./" includes="src/ public/ resources/ conf/ doc/" prefix="${pomfile.artifactId}-${pomfile.version}"/>
-			<!-- Note: pandd-framework itself will be exluded -->
-			<zipfileset dir="dist/compiled/" excludes="/de/bgeb/pandd/" prefix="${pomfile.artifactId}-${pomfile.version}" />
-		</zip>
-		
-		<!-- delete compiled content to avoid double code suggestion in eclipse ide -->
-		<defaultexcludes remove="**/.gitignore"/>
-        <delete includeemptydirs="true" >
-        	<fileset dir="dist/compiled" includes="**/*" excludes=".gitignore" />
-        </delete>
-		<defaultexcludes add="**/.gitignore"/>
-	</target>
-
-	<target name="mvn_package">
-		<echo message="not implemented yet" />
-	</target>
-	<target name="mvn_install">
-		<echo message="not implemented yet" />
-	</target>
-	<target name="mvn_deploy">
-		<echo message="not implemented yet" />
+	<target name="_load_dependencies">
+		<ant antfile="build.xml" target="update-dependencies" />
 	</target>
 </project>
