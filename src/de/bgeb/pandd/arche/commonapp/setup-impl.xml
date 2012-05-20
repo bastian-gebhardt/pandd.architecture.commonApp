@@ -70,13 +70,12 @@
     </exec>
     	
 	<target name="setup" depends="_copy_skeleton, _create_packages, _copy_pom, _insert_parent-pom, _insert_repo-settings, _remove_unset_tokens, _copy_build-interface, _load_dependencies">
-		<!-- move pandd into lib-folder -->
 		<!-- copy skeleton -->
 		<!-- create src/groupId/artifactId -->
 		<!-- create test/groupId/artifactId -->
 		<!-- copy pom -->
 		<!-- copy framework build-inteface -->
-		<!-- copy bootstrap file -->
+		<!-- run update dependencies -->
 	</target>
 	
 	<target name="_copy_skeleton">
