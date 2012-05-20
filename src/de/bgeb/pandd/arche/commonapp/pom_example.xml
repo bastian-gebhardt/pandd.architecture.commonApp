@@ -24,19 +24,19 @@
 	    <dependency>
 	      <groupId>de.bgeb.pandd.arche</groupId>
 	      <artifactId>commonapp</artifactId>
-	      <version>0.2.0-SNAPSHOT</version>
+	      <version>1.0.0</version>
 	      <scope>test</scope>
 	    </dependency>
 	    <dependency>
 	      <groupId>de.bgeb.pandd</groupId>
 	      <artifactId>package</artifactId>
-	      <version>0.1.0-SNAPSHOT</version>
+	      <version>1.0.0</version>
 	      <scope>test</scope>
 	    </dependency>
 	    <dependency>
 	      <groupId>de.bgeb.pandd</groupId>
 	      <artifactId>bootstrap</artifactId>
-	      <version>0.1.0-SNAPSHOT</version>
+	      <version>1.0.0</version>
 	      <scope>test</scope>
 	    </dependency>
 <!-- pandd framework dependencies -->

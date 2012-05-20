@@ -13,13 +13,13 @@
       
 	<groupId>de.bgeb.pandd.arche</groupId>
     <artifactId>commonapp</artifactId>
-    <version>0.2.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     
     <dependencies>
 	    <dependency>
 	      <groupId>de.bgeb.pandd</groupId>
 	      <artifactId>framework</artifactId>
-	      <version>0.2.0-SNAPSHOT</version>
+	      <version>1.0.0</version>
 	    </dependency>
     </dependencies>
     
