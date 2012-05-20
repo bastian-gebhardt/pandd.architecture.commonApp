@@ -14,7 +14,7 @@
 	<groupId>@add_project_groupId_here@</groupId>
     <artifactId>@add_project_artifacId_here@</artifactId>
     <version>@add_project_version_here@</version>
-    <packaging>app</packaging>
+    <packaging>zip</packaging>
     
     <dependencies>
         <dependency>
@@ -48,8 +48,8 @@
     </dependencies>
     
        <properties>
-   		<pandd.packaging.lib>de/bgeb/pandd/package/lib.xml</pandd.packaging.lib>
-   		<pandd.packaging.app>de/bgeb/pandd/package/app.xml</pandd.packaging.app>
+   		<pandd.packaging.jar>de/bgeb/pandd/package/lib.xml</pandd.packaging.jar>
+   		<pandd.packaging.zip>de/bgeb/pandd/package/app.xml</pandd.packaging.zip>
    		<pandd.bootstrap.dev>de/bgeb/pandd/bootstrap/dev.xml</pandd.bootstrap.dev>
    		<pandd.bootstrap.pro>de/bgeb/pandd/bootstrap/pro.xml</pandd.bootstrap.pro>
    </properties>
