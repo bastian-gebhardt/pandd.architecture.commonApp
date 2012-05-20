@@ -5,14 +5,71 @@
     	(there are nothing to configure in this file)
     </description>
 
+	<taskdef resource="net/sf/antcontrib/antlib.xml"/>
+		
+    <property name="parentpomentry">
+	 	<![CDATA[
+	      <parent>
+	      	<groupId>${parent-pom_groupId}</groupId>
+	      	<artifactId>${parent-pom_artifactId}</artifactId>
+	      	<version>${parent-pom_version}</version>
+	      </parent>
+		]]>
+    </property>
 	
+	<if>
+		<equals arg1="${mvn_download_repo}" arg2="${mvn_snapshot_download_repo}"/>
+		<then>
+			<property name="mix_snapshot_release" value="true" />
+		</then>
+		<else>
+			<property name="mix_snapshot_release" value="false" />
+		</else>
+	</if>
+	
+	<property name="repo-settings">
+	 	<![CDATA[
+    	   <repositories>
+    	         <repository>
+    	               <id>php-release</id>
+    	               <url>${mvn_download_repo}</url>
+    	               <snapshots>
+    	                     <enabled>${mix_snapshot_release}</enabled>
+    	               </snapshots>
+    	         </repository>
+    	         <repository>
+    	               <id>php-snapshots</id>
+    					<url>${mvn_snapshot_download_repo}</url>
+    	               <releases>
+    	                     <enabled>${mix_snapshot_release}</enabled>
+    	               </releases>
+    	         </repository>
+    	   </repositories>
+    		
+    		<distributionManagement>  
+    			<repository>
+    			  <id>upload-server</id>
+    			  <name>user specified upload repo</name>
+    				<url>${mvn_upload_repo}</url>
+    			  <layout>default</layout>
+    			</repository>
+    			<snapshotRepository>
+    			    <id>snapshot-upload-server</id>
+    			    <name>user specified snapshot upload repo</name>
+    				<url>${mvn_snapshot_upload_repo}</url>
+    			    <layout>default</layout>
+    			    <uniqueVersion>false</uniqueVersion>
+    			</snapshotRepository>
+    	  </distributionManagement>
+		]]>
+    </property>	
 	
     <!-- Betriebssystemunabhaengige Loesung finden -->
     <exec executable="sed" inputstring="${project_groupId}" outputproperty="project_groupId_as_path">
       <arg value="s/\./\//g"/>
     </exec>
     	
-	<target name="setup" depends="_copy_skeleton, _create_packages, _copy_pom, _copy_build-interface, _load_dependencies">
+	<target name="setup" depends="_copy_skeleton, _create_packages, _copy_pom, _insert_parent-pom, _insert_repo-settings, _remove_unset_tokens, _copy_build-interface, _load_dependencies">
 		<!-- move pandd into lib-folder -->
 		<!-- copy skeleton -->
 		<!-- create src/groupId/artifactId -->
@@ -45,6 +102,19 @@
         <replace file="pom.xml" token="@add_project_groupId_here@" value="${project_groupId}"/>
         <replace file="pom.xml" token="@add_project_version_here@" value="${project_version}"/>
     </target>
+	
+    <target name="_insert_parent-pom" if="${use_parent-pom}">
+    	<replace file="pom.xml" value="${parentpomentry}" token="&lt;!-- @add_parent_pom_here@ --&gt;" />
+    </target>
+	
+    <target name="_insert_repo-settings" if="${add_repo_config}">
+    	<replace file="pom.xml" value="${repo-settings}" token="&lt;!-- @add_repo_settings_here@ --&gt;" />
+    </target>
+	
+	<target name="_remove_unset_tokens">
+    	<replace file="pom.xml" value="" token="&lt;!-- @add_parent_pom_here@ --&gt;" />
+    	<replace file="pom.xml" value="" token="&lt;!-- @add_repo_settings_here@ --&gt;" />
+	</target>	
 	
 	<target name="_copy_build-interface">
         <copy file="lib/de/bgeb/pandd/framework/build-interface.xml" tofile="build.xml" />

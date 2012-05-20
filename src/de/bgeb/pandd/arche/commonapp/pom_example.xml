@@ -3,11 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   
-      <parent>
-      	<groupId>de.bgeb</groupId>
-      	<artifactId>bgeb-superpom</artifactId>
-      	<version>1.0.0</version>
-      </parent>	
+    <!-- @add_parent_pom_here@ -->
       
     <name>@add_project_artifacId_here@</name>
 
@@ -53,5 +49,7 @@
    		<pandd.bootstrap.dev>de/bgeb/pandd/bootstrap/dev.xml</pandd.bootstrap.dev>
    		<pandd.bootstrap.pro>de/bgeb/pandd/bootstrap/pro.xml</pandd.bootstrap.pro>
    </properties>
+
+  <!-- @add_repo_settings_here@ -->
 
 </project>
