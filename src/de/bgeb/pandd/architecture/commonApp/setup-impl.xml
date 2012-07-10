@@ -142,7 +142,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	</target>	
 	
 	<target name="_copy_build-interface">
-        <copy file="lib/de/bgeb/pandd/framework/build-interface.xml" tofile="build.xml" />
+        <copy file="lib/de/bgeb/pandd/core/build-interface.xml" tofile="build.xml" />
         <replace file="build.xml" token="@add_project_name_here@" value="${project_artifactId}"/>
         <replace file="build.xml" token="@add_arche-package_here@" value="lib/${arche_groupIdAsPath}/${arche_artifactId}"/>
 	</target>

@@ -49,20 +49,20 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 <!-- pandd framework dependencies -->
 	    <dependency>
 	      <groupId>de.bgeb.pandd.arche</groupId>
-	      <artifactId>commonapp</artifactId>
-	      <version>1.0.0</version>
+	      <artifactId>commonApp</artifactId>
+	      <version>1.0.0-SNAPSHOT</version>
 	      <scope>test</scope>
 	    </dependency>
 	    <dependency>
-	      <groupId>de.bgeb.pandd</groupId>
+	      <groupId>de.bgeb.pandd.plugin</groupId>
 	      <artifactId>package</artifactId>
-	      <version>1.0.0</version>
+	      <version>1.0.0-SNAPSHOT</version>
 	      <scope>test</scope>
 	    </dependency>
 	    <dependency>
-	      <groupId>de.bgeb.pandd</groupId>
+	      <groupId>de.bgeb.pandd.plugin</groupId>
 	      <artifactId>bootstrap</artifactId>
-	      <version>1.0.0</version>
+	      <version>1.0.0-SNAPSHOT</version>
 	      <scope>test</scope>
 	    </dependency>
 <!-- pandd framework dependencies -->
@@ -70,10 +70,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </dependencies>
     
        <properties>
-   		<pandd.packaging.jar>de/bgeb/pandd/package/lib.xml</pandd.packaging.jar>
-   		<pandd.packaging.zip>de/bgeb/pandd/package/app.xml</pandd.packaging.zip>
-   		<pandd.bootstrap.dev>de/bgeb/pandd/bootstrap/dev.xml</pandd.bootstrap.dev>
-   		<pandd.bootstrap.pro>de/bgeb/pandd/bootstrap/pro.xml</pandd.bootstrap.pro>
+   		<pandd.packaging.jar>de/bgeb/pandd/plugin/package/lib.xml</pandd.packaging.jar>
+   		<pandd.packaging.zip>de/bgeb/pandd/plugin/package/app.xml</pandd.packaging.zip>
+   		<pandd.bootstrap.dev>de/bgeb/pandd/plugin/bootstrap/dev.xml</pandd.bootstrap.dev>
+   		<pandd.bootstrap.pro>de/bgeb/pandd/plugin/bootstrap/pro.xml</pandd.bootstrap.pro>
    </properties>
 
   <!-- @add_repo_settings_here@ -->
