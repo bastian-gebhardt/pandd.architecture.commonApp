@@ -48,7 +48,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 <!-- pandd framework dependencies -->
 	    <dependency>
-	      <groupId>de.bgeb.pandd.arche</groupId>
+	      <groupId>de.bgeb.pandd.architecture</groupId>
 	      <artifactId>commonApp</artifactId>
 	      <version>1.0.0-SNAPSHOT</version>
 	      <scope>test</scope>
