@@ -42,27 +42,27 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <dependency>
     		<groupId>org.sebastianbergmann</groupId>
     		<artifactId>phpunit</artifactId>
-    		<version>3.6.10</version>
+    		<version>3.6.11</version>
     		<scope>test</scope>
     	</dependency>
 
 <!-- pandd framework dependencies -->
 	    <dependency>
-	      <groupId>de.bgeb.pandd.architecture</groupId>
-	      <artifactId>commonApp</artifactId>
-	      <version>1.0.0-SNAPSHOT</version>
+	      <groupId>de.bgeb.pandd</groupId>
+	      <artifactId>core</artifactId>
+	      <version>1.0.0</version>
 	      <scope>test</scope>
 	    </dependency>
 	    <dependency>
 	      <groupId>de.bgeb.pandd.plugin</groupId>
 	      <artifactId>package</artifactId>
-	      <version>1.0.0-SNAPSHOT</version>
+	      <version>1.0.0</version>
 	      <scope>test</scope>
 	    </dependency>
 	    <dependency>
 	      <groupId>de.bgeb.pandd.plugin</groupId>
 	      <artifactId>bootstrap</artifactId>
-	      <version>1.0.0-SNAPSHOT</version>
+	      <version>1.0.0</version>
 	      <scope>test</scope>
 	    </dependency>
 <!-- pandd framework dependencies -->

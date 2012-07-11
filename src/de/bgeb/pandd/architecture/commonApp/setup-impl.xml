@@ -25,10 +25,9 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 <!DOCTYPE project>
-<project name="pandd_build_impl" basedir="." xmlns:artifact="antlib:org.apache.maven.artifact.ant">
+<project name="pandd.setup-impl" basedir="." xmlns:artifact="antlib:org.apache.maven.artifact.ant">
     <description>
-    	Implementation from Setup file for Pandd Framework Developing
-    	(there are nothing to configure in this file)
+    	Setup Implementation
     </description>
 
 	<taskdef resource="net/sf/antcontrib/antlib.xml"/>
@@ -84,13 +83,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     			    <name>user specified snapshot upload repo</name>
     				<url>${mvn_snapshot_upload_repo}</url>
     			    <layout>default</layout>
-    			    <uniqueVersion>false</uniqueVersion>
+    			    <uniqueVersion>true</uniqueVersion>
     			</snapshotRepository>
     	  </distributionManagement>
 		]]>
     </property>	
 	
-    <!-- Betriebssystemunabhaengige Loesung finden -->
+    <!-- TODO: find os-independed solution -->
     <exec executable="sed" inputstring="${project_groupId}" outputproperty="project_groupId_as_path">
       <arg value="s/\./\//g"/>
     </exec>
