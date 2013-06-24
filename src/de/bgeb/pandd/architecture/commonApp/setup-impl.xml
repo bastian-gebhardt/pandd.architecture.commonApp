@@ -3,25 +3,25 @@
 Copyright © 2012 by Bastian Gebhardt
 All rights reserved.
 
-Redistribution and use in source and binary forms, with or without modification, 
+Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
 
-1. Redistributions of source code must retain the above copyright notice, 
+1. Redistributions of source code must retain the above copyright notice,
    this list of conditions and the following disclaimer.
 
-2. Redistributions in binary form must reproduce the above copyright notice, 
-   this list of conditions and the following disclaimer in the documentation 
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
    and/or other materials provided with the distribution.
 
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE 
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
 ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
 FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
-SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER 
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, 
-OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 <!DOCTYPE project>
@@ -31,7 +31,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </description>
 
 	<taskdef resource="net/sf/antcontrib/antlib.xml"/>
-		
+
     <property name="parentpomentry">
 	 	<![CDATA[
 	      <parent>
@@ -41,7 +41,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	      </parent>
 		]]>
     </property>
-	
+
 	<if>
 		<equals arg1="${mvn_download_repo}" arg2="${mvn_snapshot_download_repo}"/>
 		<then>
@@ -51,7 +51,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 			<property name="mix_snapshot_release" value="false" />
 		</else>
 	</if>
-	
+
 	<property name="repo-settings">
 	 	<![CDATA[
     	   <repositories>
@@ -70,8 +70,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     	               </releases>
     	         </repository>
     	   </repositories>
-    		
-    		<distributionManagement>  
+
+    		<distributionManagement>
     			<repository>
     			  <id>upload-server</id>
     			  <name>user specified upload repo</name>
@@ -87,13 +87,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     			</snapshotRepository>
     	  </distributionManagement>
 		]]>
-    </property>	
-	
+    </property>
+
     <!-- TODO: find os-independed solution -->
     <exec executable="sed" inputstring="${project_groupId}" outputproperty="project_groupId_as_path">
       <arg value="s/\./\//g"/>
     </exec>
-    	
+
 	<target name="setup" depends="_copy_skeleton, _create_packages, _copy_pom, _insert_parent-pom, _insert_repo-settings, _remove_unset_tokens, _copy_build-interface, _load_dependencies">
 		<!-- copy skeleton -->
 		<!-- create src/groupId/artifactId -->
@@ -102,7 +102,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		<!-- copy framework build-inteface -->
 		<!-- run update dependencies -->
 	</target>
-	
+
 	<target name="_copy_skeleton">
 		<defaultexcludes remove="**/.gitignore"/>
 		<copy todir=".">
@@ -112,7 +112,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		<chmod file="resources/phpunit.php" perm="755"/>
 		<defaultexcludes add="**/.gitignore"/>
 	</target>
-	
+
 	<target name="_create_packages">
 		<mkdir dir="src/${project_groupId_as_path}/${project_artifactId}" />
 		<mkdir dir="test/${project_groupId_as_path}/${project_artifactId}" />
@@ -126,24 +126,26 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <replace file="pom.xml" token="@add_project_groupId_here@" value="${project_groupId}"/>
         <replace file="pom.xml" token="@add_project_version_here@" value="${project_version}"/>
     </target>
-	
+
     <target name="_insert_parent-pom" if="${use_parent-pom}">
     	<replace file="pom.xml" value="${parentpomentry}" token="&lt;!-- @add_parent_pom_here@ --&gt;" />
     </target>
-	
+
     <target name="_insert_repo-settings" if="${add_repo_config}">
     	<replace file="pom.xml" value="${repo-settings}" token="&lt;!-- @add_repo_settings_here@ --&gt;" />
     </target>
-	
+
 	<target name="_remove_unset_tokens">
     	<replace file="pom.xml" value="" token="&lt;!-- @add_parent_pom_here@ --&gt;" />
     	<replace file="pom.xml" value="" token="&lt;!-- @add_repo_settings_here@ --&gt;" />
-	</target>	
-	
+	</target>
+
 	<target name="_copy_build-interface">
         <copy file="lib/de/bgeb/pandd/core/build-interface.xml" tofile="build.xml" />
         <replace file="build.xml" token="@add_project_name_here@" value="${project_artifactId}"/>
         <replace file="build.xml" token="@add_arche-package_here@" value="lib/${arche_groupIdAsPath}/${arche_artifactId}"/>
+        <copy file="lib/de/bgeb/pandd/core/code_quality-interface.xml" tofile="code_quality.xml" />
+        <replace file="code_quality.xml" token="@add_project_name_here@" value="${project_artifactId}"/>
 	</target>
 
 	<target name="_load_dependencies">
